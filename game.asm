@@ -99,40 +99,40 @@ handle_input:
 
 .red_up_lane_0:
     cmp ax, 42          ; Límite superior fila 0 (Y=40 + 2)
-    jle .no_key
+    jle .red_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     sub word [red_car_y], 3
     jmp .no_key
 
 .red_up_lane_1:
     cmp ax, 82          ; Límite superior fila 1 (Y=80 + 2)
-    jle .no_key
+    jle .red_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     sub word [red_car_y], 3
     jmp .no_key
 
 .red_up_lane_2:
     cmp ax, 132         ; Límite superior fila 2 (Y=130 + 2)
-    jle .no_key
+    jle .red_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     sub word [red_car_y], 3
     jmp .no_key
 
@@ -152,40 +152,40 @@ handle_input:
 
 .red_down_lane_0:
     cmp ax, 75          ; Límite inferior fila 0 (Y=80 - 5)
-    jge .no_key
+    jge .red_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     add word [red_car_y], 3
     jmp .no_key
 
 .red_down_lane_1:
     cmp ax, 125         ; Límite inferior fila 1 (Y=130 - 5)
-    jge .no_key
+    jge .red_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     add word [red_car_y], 3
     jmp .no_key
 
 .red_down_lane_2:
     cmp ax, 165         ; Límite inferior fila 2 (Y=170 - 5)
-    jge .no_key
+    jge .red_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [red_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [red_car_x] ; Posición X actual
     call check_red_collision
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     add word [red_car_y], 3
     jmp .no_key
 
@@ -193,13 +193,13 @@ handle_input:
     ; Mueve el auto rojo hacia la izquierda
     mov ax, [red_car_x]
     cmp ax, 10          ; Límite izquierdo
-    jle .no_key
+    jle .red_wall_collision  ; Colisión con pared izquierda
     ; Verifica colisión con obstáculos antes de moverse
     sub ax, 6           ; Nueva posición X
     mov bx, [red_car_y] ; Posición Y actual
     call check_red_collision_at_pos
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     sub word [red_car_x], 6
     jmp .no_key
     
@@ -213,7 +213,7 @@ handle_input:
     mov bx, [red_car_y] ; Posición Y actual
     call check_red_collision_at_pos
     cmp al, 1
-    je .no_key
+    je .red_obstacle_collision
     add word [red_car_x], 6
     jmp .no_key
 
@@ -264,40 +264,40 @@ handle_input:
 
 .blue_up_lane_0:
     cmp ax, 42          ; Límite superior fila 0 (Y=40 + 2)
-    jle .no_key
+    jle .blue_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     sub word [blue_car_y], 3
     jmp .no_key
 
 .blue_up_lane_1:
     cmp ax, 82          ; Límite superior fila 1 (Y=80 + 2)
-    jle .no_key
+    jle .blue_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     sub word [blue_car_y], 3
     jmp .no_key
 
 .blue_up_lane_2:
     cmp ax, 132         ; Límite superior fila 2 (Y=130 + 2)
-    jle .no_key
+    jle .blue_wall_collision  ; Colisión con pared superior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     sub ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     sub word [blue_car_y], 3
     jmp .no_key
 
@@ -317,40 +317,40 @@ handle_input:
 
 .blue_down_lane_0:
     cmp ax, 75          ; Límite inferior fila 0 (Y=80 - 5)
-    jge .no_key
+      jge .blue_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     add word [blue_car_y], 3
     jmp .no_key
 
 .blue_down_lane_1:
     cmp ax, 125         ; Límite inferior fila 1 (Y=130 - 5)
-    jge .no_key
+    jge .blue_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     add word [blue_car_y], 3
     jmp .no_key
 
 .blue_down_lane_2:
     cmp ax, 165         ; Límite inferior fila 2 (Y=170 - 5)
-    jge .no_key
+    jge .blue_wall_collision  ; Colisión con pared inferior
     ; Verifica colisión con obstáculos antes de moverse
     mov ax, [blue_car_y]
     add ax, 3           ; Nueva posición Y
     mov bx, [blue_car_x] ; Posición X actual
     call check_blue_collision
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     add word [blue_car_y], 3
     jmp .no_key
 
@@ -358,13 +358,13 @@ handle_input:
     ; Mueve el auto azul hacia la izquierda
     mov ax, [blue_car_x]
     cmp ax, 10          ; Límite izquierdo
-    jle .no_key
+    jle .blue_wall_collision  ; Colisión con pared izquierda
     ; Verifica colisión con obstáculos antes de moverse
     sub ax, 6           ; Nueva posición X
     mov bx, [blue_car_y] ; Posición Y actual
     call check_blue_collision_at_pos
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     sub word [blue_car_x], 6
     jmp .no_key
     
@@ -378,7 +378,7 @@ handle_input:
     mov bx, [blue_car_y] ; Posición Y actual
     call check_blue_collision_at_pos
     cmp al, 1
-    je .no_key
+    je .blue_obstacle_collision
     add word [blue_car_x], 6
     jmp .no_key
 
@@ -424,6 +424,40 @@ handle_input:
     hlt
 
 .no_key:
+    ret
+
+; Reinicia el auto rojo al principio cuando colisiona con una pared
+.red_wall_collision:
+    call reset_red_car
+    jmp .no_key
+
+; Reinicia el auto rojo al principio cuando colisiona con un obstáculo
+.red_obstacle_collision:
+    call reset_red_car
+    jmp .no_key
+
+; Reinicia el auto azul al principio cuando colisiona con una pared
+.blue_wall_collision:
+    call reset_blue_car
+    jmp .no_key
+
+; Reinicia el auto azul al principio cuando colisiona con un obstáculo
+.blue_obstacle_collision:
+    call reset_blue_car
+    jmp .no_key
+
+; Función para reiniciar el auto rojo a su posición inicial
+reset_red_car:
+    mov word [red_car_x], 10
+    mov word [red_car_y], 55
+    mov byte [red_car_lane], 0
+    ret
+
+; Función para reiniciar el auto azul a su posición inicial
+reset_blue_car:
+    mov word [blue_car_x], 10
+    mov word [blue_car_y], 60
+    mov byte [blue_car_lane], 0
     ret
 
 ; Dibuja toda la pantalla
